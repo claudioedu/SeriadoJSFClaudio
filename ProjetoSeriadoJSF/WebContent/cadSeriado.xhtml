@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Cadastro</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:layout fullPage="true">
+
+			<p:layoutUnit position="center" style="box-shadow:5px 5px 10px #000;">
+				<p:tabMenu activeIndex="#{param.i}">
+					<p:menuitem value="Home" outcome="index.xhtml"
+						icon="fa fa-home fa-fw">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="Seriado" outcome="cadSeriado.xhtml">
+						<f:param name="i" value="1" />
+					</p:menuitem>
+					<p:menuitem value="Status" outcome="cadStatus.xhtml">
+						<f:param name="i" value="2" />
+					</p:menuitem>
+					<p:menuitem value="Gênero" outcome="cadGenero.xhtml">
+						<f:param name="i" value="3" />
+					</p:menuitem>
+					<p:menuitem value="Listar" outcome="listaSeriado.xhtml"
+						icon="fa fa-list-ol fa-fw">
+						<f:param name="i" value="4" />
+					</p:menuitem>
+					
+
+				</p:tabMenu>
+
+				<p:panel header="Seriado"
+					style="width:50%;margin:5px auto;box-shadow:0px 0px 10px #000;text-align:center;height:93%;background-color:#999;">
+					<p:growl id="growl" sticky="true" />
+					<p:panelGrid columns="2"
+						style="margin:15% auto;box-shadow:0px 0px 10px #000;">
+						<f:facet name="header">
+							<p:outputLabel value="Cadastro de Seriados" />
+						</f:facet>
+						<p:outputLabel value="Gênero: " for="gen" />
+						<p:selectOneMenu id="gen" converter="generoConverter"
+							required="true" requiredMessage="*Selecione um Gênero!"
+							value="#{seriadoControllerClaudio.genSel}">
+							<f:selectItem itemLabel="SELECIONE" />
+							<f:selectItems value="#{generoControllerClaudio.listar}" var="m"
+								itemLabel="#{m.descricao}" itemValue="#{m}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Status: " for="sta" />
+						<p:selectOneMenu id="sta" converter="statusConverter"
+							required="true" requiredMessage="*Selecione um Status!"
+							value="#{seriadoControllerClaudio.statusSelecionado}">
+							<f:selectItem itemLabel="SELECIONE" />
+							<f:selectItems value="#{statusControllerClaudio.listar}" var="v"
+								itemLabel="#{
+								v.descricao}" itemValue="#{v}" />
+								
+						</p:selectOneMenu>
+						
+						<p:outputLabel for="nome" value="Nome: " />
+						<p:inputText id="nome"
+							value="#{seriadoControllerClaudio.seriado.nome}" required="true"
+							requiredMessage="*O Nome do seriado deve ser informado!"
+							label="Nome ">
+							<f:validateLength maximum="20" />
+						</p:inputText>
+						<p:outputLabel for="des" value="Comentário: " />
+						<p:inputText id="des"
+							value="#{seriadoControllerClaudio.seriado.comentario}" required="true"
+							requiredMessage="*o Comentário do Seriado deve ser informado!"
+							label="Descrição ">
+							<f:validateLength maximum="100" />
+						</p:inputText>
+						<p:outputLabel value="Nota: " for="val" />
+					<p:inputText id="val" value="#{seriadoControllerClaudio.seriado.nota}"
+						required="true" requiredMessage="A Nota deve ser informado!"
+						label="Nota ">
+						<f:validateDoubleRange maximum="100" />
+					</p:inputText>
+						
+						<f:facet name="footer">
+							<p:commandButton ajax="false" value="Salvar"
+								action="#{seriadoControllerClaudio.salvar}" icon="fa fa-save fa-fw"
+								style="float:right;margin:5px;" update="growl" />
+							<p:commandButton value="Limpar" ajax="false" immediate="true"
+								action="#{seriadoControllerClaudio.limpaCampos}" update="form"
+								style="float:right;margin:5px;" icon="fa fa-eraser fa-fw " />
+						</f:facet>
+					</p:panelGrid>
+				</p:panel>
+			</p:layoutUnit>
+
+		
+		
+
+		</p:layout>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title> Menu </title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" header="Series"
+				resizable="false" closable="false" collapsible="false"
+				style="text-align:center;box-shadow:5px 5px 5px #3399ff;">
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" resizable="false" closable="false"
+				collapsible="false">
+
+				<p:panelMenu style="margin:8px;box-shadow:0px 0px 5px #3399ff;"
+					stateful="false">
+					<p:submenu label="Gênero">
+						<p:menuitem value="Cadastrar" url="cadGenero.xhtml"
+							icon="ui-icon-disk" />
+						<p:menuitem value="Listar" url="listaGenero.xhtml"
+							icon="ui-icon-document" />
+					</p:submenu>
+					<p:submenu label="Status">
+						<p:menuitem value="Cadastrar" url="cadStatus.xhtml"
+							icon="ui-icon-disk" />
+						<p:menuitem value="Listar" url="listaStatus.xhtml"
+							icon="ui-icon-document" />
+					</p:submenu>
+					<p:submenu label="Seriado">
+						<p:menuitem value="Cadastrar" url="cadSeriado.xhtml"
+							icon="ui-icon-disk" />
+						<p:menuitem value="Listar" url="listaSeriado.xhtml"
+							icon="ui-icon-document" />
+					</p:submenu>
+				</p:panelMenu>
+			</p:layoutUnit>
+
+			
+		</p:layout>
+	</h:form>
+</h:body>
+
+</html>

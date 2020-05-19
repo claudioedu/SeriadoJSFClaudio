@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:layout fullPage="true">
+			<p:layoutUnit position="north" header="lista de Series"
+				resizable="false" closable="false" collapsible="false"
+				style="text-align:center;box-shadow:5px 5px 10px #330000;">
+			</p:layoutUnit>
+
+			<p:layoutUnit position="west" size="200" resizable="false"
+				closable="false" collapsible="false">
+
+				<p:panelMenu style="margin:5px;" stateful="false">
+					<p:submenu label="Menu">
+						<p:menuitem value="Voltar" url="index.xhtml"
+							icon="ui-icon-arrowreturnthick-1-w" />
+					</p:submenu>
+					<p:submenu label="Seriado">
+						<p:menuitem value="Cadastrar" url="cadSeriado.xhtml"
+							icon="ui-icon-disk" />
+						<p:menuitem value="listar" url="listaSeriado.xhtml"
+							icon="ui-icon-document" />
+					</p:submenu>
+					<p:submenu label="Status">
+						<p:menuitem value="Cadastrar" url="cadStatus.xhtml"
+							icon="ui-icon-disk" />
+						<p:menuitem value="listar" url="listaStatus.xhtml"
+							icon="ui-icon-document" />
+					</p:submenu>
+					<p:submenu label="Gênero">
+						<p:menuitem value="Cadastrar" url="cadGenero.xhtml"
+							icon="ui-icon-disk" />
+						<p:menuitem value="listar" url="listaGenero.xhtml"
+							icon="ui-icon-document" />
+					</p:submenu>
+				</p:panelMenu>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" resizable="false" closable="false"
+				collapsible="false">
+				<p:growl id="growl" sticky="true" />
+				<p:dataTable var="p" value="#{seriadoControllerClaudio.lista}"
+					resizableColumns="true"
+					style="margin:5px;box-shadow:0px 0px 10px #000;">
+					<f:facet name="header">
+						<h:outputText value="Seriados Cadastrados" />
+					</f:facet>
+					<p:column headerText="Id" style="text-align:center;width:50px;">
+						<h:outputText value="#{p.id}" />
+					</p:column>
+						<p:column headerText="Gênero" style="text-align:center;">
+						<h:outputText value="#{p.genero.descricao}" />
+					</p:column>
+					<p:column headerText="Status" style="text-align:center;">
+						<h:outputText value="#{p.status.descricao}" />
+					</p:column>
+					<p:column headerText="Nome" style="text-align:center;">
+						<h:outputText value="#{p.nome}" />
+					</p:column>
+					<p:column headerText="Comentário" style="text-align:center;">
+						<h:outputText value="#{p.comentario}"/>
+					</p:column>
+					<p:column headerText="Nota" style="text-align:center;">
+						<h:outputText value="#{p.nota}" />
+					</p:column>
+					<p:column headerText="Ações" style="width:205px;">
+						<p:commandButton icon="ui-icon-pencil" ajax="false" value="Editar"
+							action="#{seriadoControllerClaudio.alterar}">
+							<f:setPropertyActionListener value="#{p}"
+								target="#{seriadoControllerClaudio.seriado}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-close" ajax="false" value="Excluir"
+							action="#{seriadoControllerClaudio.excluir}"
+							onclick="return confirm('Confirma a exclusão do Seriado  #{p.id} com Id = #{p.id} ?')"
+							update="growl">
+							<f:setPropertyActionListener value="#{p}"
+								target="#{seriadoControllerClaudio.seriado}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:layoutUnit>
+
+			
+		</p:layout>
+	</h:form>
+</h:body>
+
+</html>
